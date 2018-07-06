@@ -12,19 +12,16 @@ var io=socketIO(server);
 
 io.on('connection',(socket)=>{
   console.log('New user connected');
-  // socket.emit('newEmail',{
-  //   from:'brajesh@gmail.com',
-  //   text:'hii',
-  //   createAt:123
-  // });
-// socket.emit('newMessage',{
-//   from:'manas',
-//   text:'see u then',
-//   createdAt:12345
-// });
-  // socket.on('createEmail',(newEmail)=>{
-  //   console.log('createEmail',newEmail);
-  // });
+  socket.emit('newMessage',{
+  from:'Admin',
+  text:'welcome to chat app',
+    createdAt:new Date().getTime()
+});
+socket.broadcast.emit('newMessage',{
+  from:'Admin',
+  text:'New user joined',
+  createdAt:new Date().getTime()
+});
 
   socket.on('createMessage',(message)=>{
     console.log('createMessage',message);
