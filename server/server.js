@@ -9,10 +9,28 @@ var app=express();
 var server=http.createServer(app);
 
 var io=socketIO(server);
+
 io.on('connection',(socket)=>{
   console.log('New user connected');
+  // socket.emit('newEmail',{
+  //   from:'brajesh@gmail.com',
+  //   text:'hii',
+  //   createAt:123
+  // });
+socket.emit('newMessage',{
+  from:'manas',
+  text:'see u then',
+  createdAt:12345
+});
+  // socket.on('createEmail',(newEmail)=>{
+  //   console.log('createEmail',newEmail);
+  // });
+
+  socket.on('createMessage',(message)=>{
+    console.log('createMessage',message);
+  });
   socket.on('disconnect',()=>{
-    console.log('user was disconnected');
+    console.log('user was disconnected ');
   });
 });
 app.use(express.static(publicPath));
